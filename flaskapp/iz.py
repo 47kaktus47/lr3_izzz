@@ -35,8 +35,7 @@ class NetForm(FlaskForm):
  cho = RadioField('orientir', coerce=int, choices=[(0, 'gor'),(1, 'vert')])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
- color = RadioField('color', coerce=int, choices=[(0, 'red'),(1, 'blue'),(2, 'green)])
- 
+ color = RadioField('color', coerce=int, choices=[(0, 'red'),(1, 'blue'),(2, 'green')])
  upload = FileField('Load image', validators=[
  FileRequired(),
  FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
