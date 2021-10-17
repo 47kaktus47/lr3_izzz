@@ -83,7 +83,9 @@ def draw(filename,cho,col,sz):
   b = img.crop((int(y * 0.5), 0, x, y))
   img.paste(b, (0, 0))
   img.paste(a, (int(x * 0.5), 0))
+  img= np.array(img.resize((height,width)))/255.0
   img[:,122-(sz):122+(sz)]=(0,0,1)
+  img = Image.fromarray((img * 255).astype(np.uint8))
   output_filename = filename
   img.save(output_filename)
  else:
@@ -93,7 +95,9 @@ def draw(filename,cho,col,sz):
   img.paste(b, (0, 0))
   img.paste(a, (int(y * 0.5), 0))
   img=img.rotate(270)
+  img= np.array(img.resize((height,width)))/255.0
   img[122-(sz):122+(sz),:]=(0,0,1)
+  img = Image.fromarray((img * 255).astype(np.uint8))
   output_filename = filename
   img.save(output_filename)
  return output_filename,gr_path
