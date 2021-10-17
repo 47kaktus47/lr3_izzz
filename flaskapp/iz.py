@@ -35,6 +35,8 @@ class NetForm(FlaskForm):
  cho = StringField('1-изменить по вертикали,2-по горизонтали', validators = [DataRequired()])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
+ gender = SelectField('color', coerce=int, choices=[(0, 'red'),(1, 'blue'),(2, 'blue')])
+ 
  upload = FileField('Load image', validators=[
  FileRequired(),
  FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
