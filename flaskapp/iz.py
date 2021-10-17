@@ -62,7 +62,7 @@ def draw(filename,cho,col,sz):
  img= Image.open(filename)
  x, y = img.size
  cho=int(cho)
- 
+ sz=int(sz)
 ##делаем график
  fig = plt.figure(figsize=(6, 4))
  ax = fig.add_subplot()
