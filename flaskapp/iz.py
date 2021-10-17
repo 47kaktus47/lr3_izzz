@@ -75,7 +75,8 @@ def draw(filename,cho,col,sz):
  #plt.show()
  plt.savefig(gr_path)
  plt.close()
-
+ height = 224
+ width = 224
 
 ##меняем половинки
  if cho==1: 
