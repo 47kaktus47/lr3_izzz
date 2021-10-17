@@ -86,11 +86,11 @@ def draw(filename,cho,col,sz):
   img.paste(a, (int(x * 0.5), 0))
   img= np.array(img.resize((height,width)))/255.0
   if col==1:
-   img[120-(sz):120+(sz),:]=(0,0,1)
+   img[:,120-(sz):120+(sz)]=(0,0,1)
   if col==2:
-   img[120-(sz):120+(sz),:]=(0,1,0)
+   img[:,120-(sz):120+(sz)]=(0,1,0)
   if col==0:
-   img[120-(sz):120+(sz),:]=(1,0,0)
+   img[:,120-(sz):120+(sz)]=(1,0,0)
   img = Image.fromarray((img * 255).astype(np.uint8))
   output_filename = filename
   img.save(output_filename)
@@ -103,11 +103,11 @@ def draw(filename,cho,col,sz):
   img=img.rotate(270)
   img= np.array(img.resize((height,width)))/255.0
   if col==1:
-   img[:,120-(sz):120+(sz)]=(0,0,1)
+   img[120-(sz):120+(sz),:]=(0,0,1)
   if col==2:
-   img[:,120-(sz):120+(sz)]=(0,1,0)
+   img[120-(sz):120+(sz),:]=(0,1,0)
   if col==0:
-   img[:,120-(sz):120+(sz)]=(1,0,0)
+   img[120-(sz):120+(sz),:]=(1,0,0)
   img = Image.fromarray((img * 255).astype(np.uint8))
   output_filename = filename
   img.save(output_filename)
