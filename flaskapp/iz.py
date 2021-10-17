@@ -11,7 +11,7 @@ from flask import render_template
 
 # модули работы с формами и полями в формах
 from flask_wtf import FlaskForm,RecaptchaField
-from wtforms import StringField, SubmitField, TextAreaField, SelectField
+from wtforms import StringField, SubmitField, TextAreaField, RadioField
 # модули валидации полей формы
 from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
@@ -32,10 +32,10 @@ class NetForm(FlaskForm):
  # валидатор проверяет введение данных после нажатия кнопки submit
  # и указывает пользователю ввести данные если они не введены
  # или неверны
- cho = StringField('1-изменить по вертикали,2-по горизонтали', validators = [DataRequired()])
+ cho = RadioField('orientir', coerce=int, choices=[(0, 'gor'),(1, 'vert')])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
- gender = SelectField('color', coerce=int, choices=[(0, 'red'),(1, 'blue'),(2, 'blue')])
+ color = RadioField('color', coerce=int, choices=[(0, 'red'),(1, 'blue'),(2, 'green)])
  
  upload = FileField('Load image', validators=[
  FileRequired(),
