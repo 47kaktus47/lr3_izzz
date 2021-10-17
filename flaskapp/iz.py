@@ -35,6 +35,7 @@ class NetForm(FlaskForm):
  cho = RadioField('orientir', coerce=int, choices=[(0, 'gor'),(1, 'vert')])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
+ siz=StringField('size', validators = [DataRequired()])
  color = RadioField('color', coerce=int, choices=[(0, 'red'),(1, 'blue'),(2, 'green')])
  upload = FileField('Load image', validators=[
  FileRequired(),
@@ -55,7 +56,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 ## функция для оброботки изображения 
-def draw(filename,cho):
+def draw(filename,cho,col,sz):
  ##открываем изображение 
  print(filename)
  img= Image.open(filename)
@@ -82,6 +83,7 @@ def draw(filename,cho):
   b = img.crop((int(y * 0.5), 0, x, y))
   img.paste(b, (0, 0))
   img.paste(a, (int(x * 0.5), 0))
+  img[:,122-(sz):122+(sz)]=(0,0,1)
   output_filename = filename
   img.save(output_filename)
  else:
@@ -91,6 +93,7 @@ def draw(filename,cho):
   img.paste(b, (0, 0))
   img.paste(a, (int(y * 0.5), 0))
   img=img.rotate(270)
+  img[122-(sz):122+(sz),:]=(0,0,1)
   output_filename = filename
   img.save(output_filename)
  return output_filename,gr_path
@@ -111,9 +114,10 @@ def net():
   # файлы с изображениями читаются из каталога static
   filename = os.path.join('./static', secure_filename(form.upload.data.filename))
   ch=form.cho.data
- 
+  col=form.color.data
+  sz=form.siz.data
   form.upload.data.save(filename)
-  newfilename,grname = draw(filename,ch)
+  newfilename,grname = draw(filename,ch,col,sz)
  # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
  # сети если был нажат сабмит, либо передадим falsy значения
  
