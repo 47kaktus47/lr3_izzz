@@ -11,7 +11,7 @@ from flask import render_template
 
 # модули работы с формами и полями в формах
 from flask_wtf import FlaskForm,RecaptchaField
-from wtforms import StringField, SubmitField, TextAreaField
+from wtforms import StringField, SubmitField, TextAreaField, SelectField
 # модули валидации полей формы
 from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
