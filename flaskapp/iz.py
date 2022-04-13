@@ -31,6 +31,7 @@ class NetForm(FlaskForm):
 # и указывает пользователю ввести данные если они не введены
 # или неверны
  cho = StringField('1-поменять правую и левую часть,2-поменять верхнюю и нижнюю часть',validators = [DataRequired()])
+ size1=StringField('размер разделительной линии',validators = [DataRequired()])
 # поле загрузки файла
 # здесь валидатор укажет ввести правильные файлы
  upload = FileField('Load image', validators=[
@@ -50,7 +51,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
 ## функция для оброботки изображения
-def draw(filename,cho):
+def draw(filename,cho,size1):
 ##открываем изображение
  print(filename)
  img= Image.open(filename)
@@ -68,6 +69,10 @@ def draw(filename,cho):
 #plt.show()
  plt.savefig(gr_path)
  plt.close()
+ height = 224
+ width = 224
+ img= np.array(img.resize((height,width)))/255.0
+ img = Image.fromarray((img * 255).astype(np.uint8))
 ##меняем половинки картинок по выбору
  if cho==1:
   a = img.crop((0, 0, int(y * 0.5), x))
@@ -83,6 +88,25 @@ def draw(filename,cho):
   img.paste(b, (0, 0))
   img.paste(a, (int(y * 0.5), 0))
   img=img.rotate(270)
+ ##рисуем рамки
+ size1=int(size1)
+ img= np.array(img.resize((height,width)))/255.0
+ print(size1)
+ if cho==1:
+  img[:,(224//2-size1//2):(224//2+size1//2),1] = 0
+ else:
+  img[(224//2-size1//2):(224//2+size1//2),:,1] = 0
+ 
+
+
+ ##сохраняем новое изображение
+ img = Image.fromarray((img * 255).astype(np.uint8))
+ print(img)
+ #img = Image.fromarray(img)
+ new_path = "./static/new.png"
+ print(img)
+ img.save(new_path)
+
   output_filename = filename
   img.save(output_filename)
  return output_filename,gr_path
@@ -100,8 +124,9 @@ def net():
  # файлы с изображениями читаются из каталога static
   filename = os.path.join('./static', secure_filename(form.upload.data.filename))
   ch=form.cho.data
+  sz=form.size1.data
   form.upload.data.save(filename)
-  newfilename,grname = draw(filename,ch)
+  newfilename,grname = draw(filename,ch,sz)
 # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
 # сети если был нажат сабмит, либо передадим falsy значения
  return render_template('net.html',form=form,image_name=newfilename,gr_name=grname)
