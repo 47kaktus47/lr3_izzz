@@ -79,8 +79,6 @@ def draw(filename,cho,size1):
   b = img.crop((int(y * 0.5), 0, x, y))
   img.paste(b, (0, 0))
   img.paste(a, (int(x * 0.5), 0))
-  output_filename = filename
-  img.save(output_filename)
  else:
   img=img.rotate(90)
   a = img.crop((0, 0, int(y * 0.5), x))
@@ -92,10 +90,10 @@ def draw(filename,cho,size1):
  size1=int(size1)
  img= np.array(img.resize((height,width)))/255.0
  print(size1)
- ##if cho==1:
-  ##img[:,(224//2-size1//2):(224//2+size1//2),1] = 0
- ##else:
-  ##img[(224//2-size1//2):(224//2+size1//2),:,1] = 0
+ if cho==1:
+  img[:,(224//2-size1//2):(224//2+size1//2),1] = 0
+ else:
+  img[(224//2-size1//2):(224//2+size1//2),:,1] = 0
  
 
 
@@ -107,9 +105,8 @@ def draw(filename,cho,size1):
  print(img)
  img.save(new_path)
 
- output_filename = filename
- img.save(output_filename)
- return output_filename,gr_path
+ 
+ return new_path,gr_path
 # метод обработки запроса GET и POST от клиента
 @app.route("/net",methods=['GET', 'POST'])
 def net():
