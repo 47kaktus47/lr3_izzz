@@ -107,8 +107,8 @@ def draw(filename,cho,size1):
  print(img)
  img.save(new_path)
 
-  output_filename = filename
-  img.save(output_filename)
+ output_filename = filename
+ img.save(output_filename)
  return output_filename,gr_path
 # метод обработки запроса GET и POST от клиента
 @app.route("/net",methods=['GET', 'POST'])
