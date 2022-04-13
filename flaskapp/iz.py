@@ -104,7 +104,7 @@ def net():
   newfilename,grname = draw(filename,ch)
 # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
 # сети если был нажат сабмит, либо передадим falsy значения
-return render_template('net.html',form=form,image_name=newfilename,gr_name=grname)
+ return render_template('net.html',form=form,image_name=newfilename,gr_name=grname)
 if __name__ == "__main__":
  app.run(host='127.0.0.1',port=5000)
 
