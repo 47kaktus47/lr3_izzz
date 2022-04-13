@@ -71,8 +71,8 @@ def draw(filename,cho,size1):
  plt.close()
  height = 224
  width = 224
- img= np.array(img.resize((height,width)))/255.0
- img = Image.fromarray((img * 255).astype(np.uint8))
+ ##img= np.array(img.resize((height,width)))/255.0
+ ##img = Image.fromarray((img * 255).astype(np.uint8))
 ##меняем половинки картинок по выбору
  if cho==1:
   a = img.crop((0, 0, int(y * 0.5), x))
