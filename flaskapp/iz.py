@@ -93,9 +93,9 @@ def draw(filename,cho,size1):
  img= np.array(img.resize((height,width)))/255.0
  print(size1)
  if cho==1:
-  img[:,(224//2-size1//2):(224//2+size1//2),1] = 0
+  ##img[:,(224//2-size1//2):(224//2+size1//2),1] = 0
  else:
-  img[(224//2-size1//2):(224//2+size1//2),:,1] = 0
+  ##img[(224//2-size1//2):(224//2+size1//2),:,1] = 0
  
 
 
