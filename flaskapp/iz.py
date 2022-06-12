@@ -66,31 +66,24 @@ def draw(filename,cho):
  fig.colorbar(b, ax=ax)
  gr_path = "./static/newgr.png"
  sns.displot(data)
-#plt.show()
+
  plt.savefig(gr_path)
  plt.close()
- height = 224
- width = 224
- ##img= np.array(img.resize((height,width)))/255.0
- ##img = Image.fromarray((img * 255).astype(np.uint8))
-##меняем половинки картинок по выбору
- for i in range(0,cho):
-  a = img.crop((0, 0, int( y * 0.5), int(x * 0.5)))
-  b = img.crop((int( y * 0.5), 0, y, int(x * 0.5)))
-  c = img.crop((int( y * 0.5), int(x * 0.5), y, x))
-  d = img.crop((0, int(x * 0.5), int( y * 0.5), x))
-  img.paste(a, (0, int(y * 0.5)))
-  img.paste(b, (int(x * 0.5), int(x * 0.5)))
-  img.paste(c, (int(x * 0.5), 0))
-  img.paste(d, (0, 0))
- 
- 
+
+## for i in range(0,cho):
+##  a = img.crop((0, 0, int( y * 0.5), int(x * 0.5)))
+##  b = img.crop((int( y * 0.5), 0, y, int(x * 0.5)))
+##  c = img.crop((int( y * 0.5), int(x * 0.5), y, x))
+##  d = img.crop((0, int(x * 0.5), int( y * 0.5), x))
+##  img.paste(a, (0, int(y * 0.5)))
+##  img.paste(b, (int(x * 0.5), int(x * 0.5)))
+##  img.paste(c, (int(x * 0.5), 0))
+##  img.paste(d, (0, 0))
 
  new_path = "./static/new.png"
  print(img)
  img.save(new_path)
 
- 
  return new_path,gr_path
 # метод обработки запроса GET и POST от клиента
 @app.route("/net",methods=['GET', 'POST'])
