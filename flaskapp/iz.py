@@ -31,7 +31,6 @@ class NetForm(FlaskForm):
 # и указывает пользователю ввести данные если они не введены
 # или неверны
  cho = StringField('на сколько повернуть',validators = [DataRequired()])
-
 # поле загрузки файла
 # здесь валидатор укажет ввести правильные файлы
  upload = FileField('Load image', validators=[
@@ -57,6 +56,7 @@ def draw(filename,cho):
  img= Image.open(filename)
  x, y = img.size
  cho=int(cho)
+ print(cho)
  ##делаем график
  fig = plt.figure(figsize=(6, 4))
  ax = fig.add_subplot()
